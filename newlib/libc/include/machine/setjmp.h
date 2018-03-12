@@ -7,6 +7,8 @@ _BEGIN_STD_C
 #endif
 
 #if defined(__pdp11__)
+#define _JBLEN 10
+#define _JBTYPE int
 #endif
 
 #if defined(__arm__) || defined(__thumb__)
