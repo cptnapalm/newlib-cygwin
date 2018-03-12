@@ -349,6 +349,12 @@
 #define __IEEE_BIG_ENDIAN
 #endif
 
+/* From labo.nshimizu.com */
+#if defined(__pdp11__)
+#define __IEEE_BIG_ENDIAN
+#define __IEEE_BYTES_LITTLE_ENDIAN
+#endif
+
 #ifdef __IP2K__
 #define __IEEE_BIG_ENDIAN
 #define __SMALL_BITFIELDS
