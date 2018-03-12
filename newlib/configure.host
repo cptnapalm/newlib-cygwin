@@ -252,6 +252,11 @@ case "${host_cpu}" in
   or1k*|or1knd*)
 	machine_dir=or1k
 	;;
+  pdp11*)
+        machine_dir=pdp11
+	newlib_cflags="${newlib_cflags} -ffunction-sections -fdata-sections"
+	newlib_cflags="${newlib_cflags} -DPREFER_SIZE_OVER_SPEED -DSMALL_MEMORY"
+        ;;
   powerpc*)
 	machine_dir=powerpc
 	;;
@@ -526,6 +531,9 @@ case "${host}" in
 	newlib_cflags="${newlib_cflags} -DREENTRANT_SYSCALLS_PROVIDED "
 	have_crt0="no"
 	;;
+  pdp11-*-*)
+        sys_dir=syscalls
+        ;;
   powerpcle-*-pe)
 	posix_dir=posix
 	;;
