@@ -254,7 +254,6 @@ case "${host_cpu}" in
 	;;
   pdp11*)
         machine_dir=pdp11
-	newlib_cflags="${newlib_cflags} -ffunction-sections -fdata-sections"
 	newlib_cflags="${newlib_cflags} -DPREFER_SIZE_OVER_SPEED -DSMALL_MEMORY"
         ;;
   powerpc*)
