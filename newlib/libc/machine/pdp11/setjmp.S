@@ -25,22 +25,24 @@
  * stack and performing a sigreturn on the sigcontext constructed in env by
  * setjmp, see <signal.h>.
  */
-#include "DEFS.h"
+/* #include "DEFS.h" */
 
 SIG_SETMASK = 3				/ XXX - from signal.h
 
 .globl	_sigaltstack, _sigprocmask	/ needed to create sigcontext
 .globl	__ovno
+.globl setjmp
+.globl longjmp
 
-ENTRY(setjmp)
+setjmp:
 	mov	r2,-(sp)	/ save r2
 	mov	4(sp),r2	/ r2 = env
-	sub	$6.,sp		/ allocate sizeof(struct sigaltstack)
+	sub	$6,sp		/ allocate sizeof(struct sigaltstack)
 	mov	sp,r0		/   and get current sigaltstack via
 	mov	r0,-(sp)	/   sigaltstack(0, sp) (cant use "mov sp,-(sp)")
 	clr	-(sp)
 	jsr	pc,_sigaltstack
-	add	$8.,sp		/ toss 0, &oss, ss_sp, ss_size,
+	add	$8,sp		/ toss 0, &oss, ss_sp, ss_size,
 	mov	(sp)+,(r2)+	/   save ss_flags of caller
 
 	sub	$4,sp		/ sizeof (sigset_t) - oset
@@ -64,11 +66,11 @@ ENTRY(setjmp)
 	clr	r0		/ and return a zero
 	rts	pc
 
-SC_FP	= 8.			/ offset of sc_fp in sigcontext
-SC_R0	= 12.			/ offset of sc_r0 in sigcontext
+SC_FP	= 8			/ offset of sc_fp in sigcontext
+SC_R0	= 12			/ offset of sc_r0 in sigcontext
 
 .globl	rollback, _sigreturn, _longjmperror
-ENTRY(longjmp)
+longjmp:
 	mov	2(sp),r1	/ r1 = env
 	mov	SC_FP(r1),r0	/ r0 = env->sc_fp
 	jsr	pc,rollback	/ attempt stack frame rollback

@@ -6,7 +6,7 @@
  *	@(#)DEFS.h	1.1 (Berkeley) 1/25/87
  */
 
-#define	ENTRY(x)	.globl _/**/x; \
+#define	ENTRY(x)	.globl _x; \
 		_/**/x: \
 			PROFCODE(_/**/x);
 
@@ -21,6 +21,6 @@
 			.globl	mcount; \
 			mov	$1b, r0; \
 			jsr	pc,mcount;
-#else !PROF
+#else
 #define	PROFCODE(x)	;
-#endif PROF
+#endif

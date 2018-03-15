@@ -7,7 +7,7 @@
 #ifdef LIBC_SCCS
 	<@(#)crt0.s	2.4 (2.11BSD GTE) 2/02/95\0>
 	.even
-#endif LIBC_SCCS
+#endif /* LIBC_SCCS */
 
 /*
  * C runtime startoff.  When an a.out is loaded by the kernel, the kernel
@@ -75,7 +75,7 @@ _environ: .=.+2			/   others
 	.data
 	.globl	___progname, _strrchr
 
-___progname: 0
+___progname: .int   0
 	.text
 
 .globl	_exit, _main
@@ -109,7 +109,7 @@ start:
 	mov	$eprol,-(sp)
 	jsr	pc,_monstartup
 	cmp	(sp)+,(sp)+
-#endif MCRT0
+#endif /* MCRT0 */
 
 	clr	r5		/ for adb and longjmp/rollback ...
 	mov	$'/,-(sp)
@@ -148,4 +148,4 @@ mcount:
 _moncontrol:
 	rts	pc		/ do nothing
 
-#endif MCRT0
+#endif /* MCRT0 */
