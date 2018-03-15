@@ -531,7 +531,7 @@ case "${host}" in
 	have_crt0="no"
 	;;
   pdp11-*-*)
-        sys_dir=syscalls
+        sys_dir=
         ;;
   powerpcle-*-pe)
 	posix_dir=posix
