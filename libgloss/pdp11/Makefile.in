@@ -76,7 +76,7 @@ EVALOBJS = ${OBJS}
 GCC_LDFLAGS = `if [ -d ${objroot}/../gcc ] ; \
 	then echo -L${objroot}/../gcc ; fi`
 
-OUTPUTS = libnosys.a
+OUTPUTS = libnosys.a crt0.o
 SPECS = ${srcdir}/nosys.specs
 
 # Host specific makefile fragment comes in here.
