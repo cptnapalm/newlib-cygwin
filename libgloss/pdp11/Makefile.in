@@ -76,7 +76,7 @@ EVALOBJS = ${OBJS}
 GCC_LDFLAGS = `if [ -d ${objroot}/../gcc ] ; \
 	then echo -L${objroot}/../gcc ; fi`
 
-OUTPUTS = libnosys.a crt0.o
+OUTPUTS = libpdp11.a crt0.o
 SPECS = ${srcdir}/nosys.specs
 
 # Host specific makefile fragment comes in here.
@@ -88,7 +88,7 @@ all: ${OUTPUTS}
 # here's where we build the library for each target
 #
 
-libnosys.a: $(EVALOBJS)
+libpdp11.a: $(EVALOBJS)
 	${AR} ${ARFLAGS} $@ $(EVALOBJS)
 	${RANLIB} $@
 
