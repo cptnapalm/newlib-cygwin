@@ -3,9 +3,9 @@
 #include <stdint.h>
 
 struct _category {
-  enum category cat: 11;
-  uint32_t first: 21;
-  uint32_t  delta;
+  enum category cat: 8;
+  uint32_t first: 24;
+  uint16_t  delta;
 } __attribute__((packed));
 
 static const struct _category categories[] = {
