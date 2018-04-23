@@ -38,6 +38,7 @@ ANSI C, POSIX
 
 */
 
+#include <stdint.h>
 #include "fdlibm.h"
 
 #ifndef _DOUBLE_IS_32BITS
@@ -51,9 +52,12 @@ ANSI C, POSIX
 {
   int signbit;
   /* Most significant word, least significant word. */
-  int msw;
-  unsigned int lsw;
-  int exponent_less_1023;
+//  int msw;
+//  unsigned int lsw;
+//  int exponent_less_1023;
+  int32_t msw;
+  uint32_t lsw;
+  int32_t exponent_less_1023;
 
   EXTRACT_WORDS(msw, lsw, x);
 

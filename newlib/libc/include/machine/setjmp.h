@@ -6,6 +6,11 @@ _BEGIN_STD_C
 #define _JBTYPE unsigned long
 #endif
 
+#if defined(__pdp11__)
+#define _JBLEN 10
+#define _JBTYPE int
+#endif
+
 #if defined(__arm__) || defined(__thumb__)
 /*
  * All callee preserved registers:
