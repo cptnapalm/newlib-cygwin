@@ -842,6 +842,7 @@ mt
 nds32
 necv70
 nios2
+nvptx
 or1k
 pdp11
 powerpc
@@ -3798,6 +3799,12 @@ else
   USE_LIBTOOL_FALSE=
 fi
 
+
+# Emit any target-specific warnings.
+if test "x${newlib_msg_warn}" != "x"; then
+   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: ${newlib_msg_warn}" >&5
+$as_echo "$as_me: WARNING: ${newlib_msg_warn}" >&2;}
+fi
 
 # Hard-code OBJEXT.  Normally it is set by AC_OBJEXT, but we
 # use oext, which is set in configure.host based on the target platform.
@@ -11501,7 +11508,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 11504 "configure"
+#line 11511 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -11607,7 +11614,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 11610 "configure"
+#line 11621 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -11926,9 +11933,11 @@ subdirs="$subdirs a29k"
  ;;
 	nios2) subdirs="$subdirs nios2"
  ;;
+	nvptx) subdirs="$subdirs nvptx"
+ ;;
 	or1k) subdirs="$subdirs or1k"
  ;;
-        pdp11) subdirs="$subdirs pdp11"
+  pdp11) subdirs="$subdirs pdp11"
  ;;
 	powerpc) subdirs="$subdirs powerpc"
  ;;
