@@ -176,9 +176,15 @@ case "${target}" in
   or1k-*-* | or1knd-*-* )
 	AC_CONFIG_SUBDIRS([or1k])
 	;;
+<<<<<<< HEAD
   pdp11-*-*)
         AC_CONFIG_SUBDIRS([pdp11])
         ;;
+=======
+  nios2-*-*)
+	AC_CONFIG_SUBDIRS([nios2])
+	;;
+>>>>>>> dbd872f4ad8ad40bd47d8ee63cd64acc89682c31
 esac
 
 dnl For now, don't bother configuring testsuite
