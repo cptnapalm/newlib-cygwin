@@ -746,7 +746,11 @@ spu
 tic6x
 iq2000
 or1k
+<<<<<<< HEAD
 pdp11
+=======
+nios2
+>>>>>>> dbd872f4ad8ad40bd47d8ee63cd64acc89682c31
 libnosys'
 
 # Initialize some variables set by options.
@@ -2638,10 +2642,17 @@ case "${target}" in
 	subdirs="$subdirs or1k"
 
 	;;
+<<<<<<< HEAD
   pdp11-*-*)
         subdirs="$subdirs pdp11"
 
         ;;
+=======
+  nios2-*-*)
+	subdirs="$subdirs nios2"
+
+	;;
+>>>>>>> dbd872f4ad8ad40bd47d8ee63cd64acc89682c31
 esac
 
 

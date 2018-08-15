@@ -36,10 +36,17 @@
 enum {TO1, TOLO, TOUP, TOBOTH};
 enum {EVENCAP, ODDCAP};
 static struct caseconv_entry {
+<<<<<<< HEAD
   uint32_t first: 21;
   unsigned short diff: 8;
   unsigned char mode: 2;
   int32_t delta: 17;
+=======
+  uint_least32_t first: 21;
+  uint_least32_t diff: 8;
+  uint_least32_t mode: 2;
+  int_least32_t delta: 17;
+>>>>>>> dbd872f4ad8ad40bd47d8ee63cd64acc89682c31
 } __attribute__ ((packed))
 caseconv_table [] = {
 #include "caseconv.t"

@@ -380,8 +380,8 @@ public:
   virtual ssize_t __stdcall write (const void *ptr, size_t len);
   virtual ssize_t __stdcall readv (const struct iovec *, int iovcnt, ssize_t tot = -1);
   virtual ssize_t __stdcall writev (const struct iovec *, int iovcnt, ssize_t tot = -1);
-  virtual ssize_t __reg3 pread (void *, size_t, off_t);
-  virtual ssize_t __reg3 pwrite (void *, size_t, off_t);
+  virtual ssize_t __reg3 pread (void *, size_t, off_t, void *aio = NULL);
+  virtual ssize_t __reg3 pwrite (void *, size_t, off_t, void *aio = NULL);
   virtual off_t lseek (off_t offset, int whence);
   virtual int lock (int, struct flock *);
   virtual int mand_lock (int, struct flock *);
@@ -684,6 +684,8 @@ class fhandler_socket_wsock: public fhandler_socket
 
 class fhandler_socket_inet: public fhandler_socket_wsock
 {
+ private:
+  bool oobinline; /* True if option SO_OOBINLINE is set */
  protected:
   int af_local_connect () { return 0; }
 
@@ -949,6 +951,8 @@ class af_unix_shmem_t
   struct ucred *peer_cred () { return &_peer_cred; }
 };
 
+#ifdef __WITH_AF_UNIX
+
 class fhandler_socket_unix : public fhandler_socket
 {
  protected:
@@ -1107,6 +1111,8 @@ class fhandler_socket_unix : public fhandler_socket
     return fh;
   }
 };
+
+#endif /* __WITH_AF_UNIX */
 
 class fhandler_base_overlapped: public fhandler_base
 {
@@ -1424,9 +1430,10 @@ class fhandler_dev_tape: public fhandler_dev_raw
 class fhandler_disk_file: public fhandler_base
 {
   HANDLE prw_handle;
+  bool prw_handle_isasync;
   int __reg3 readdir_helper (DIR *, dirent *, DWORD, DWORD, PUNICODE_STRING fname);
 
-  int prw_open (bool);
+  int prw_open (bool, void *);
 
  public:
   fhandler_disk_file ();
@@ -1467,8 +1474,8 @@ class fhandler_disk_file: public fhandler_base
   void rewinddir (DIR *);
   int closedir (DIR *);
 
-  ssize_t __reg3 pread (void *, size_t, off_t);
-  ssize_t __reg3 pwrite (void *, size_t, off_t);
+  ssize_t __reg3 pread (void *, size_t, off_t, void *aio = NULL);
+  ssize_t __reg3 pwrite (void *, size_t, off_t, void *aio = NULL);
 
   fhandler_disk_file (void *) {}
   dev_t get_dev () { return pc.fs_serial_number (); }
@@ -2629,6 +2636,9 @@ typedef union
   char __serial[sizeof (fhandler_serial)];
   char __socket_inet[sizeof (fhandler_socket_inet)];
   char __socket_local[sizeof (fhandler_socket_local)];
+#ifdef __WITH_AF_UNIX
+  char __socket_unix[sizeof (fhandler_socket_unix)];
+#endif /* __WITH_AF_UNIX */
   char __termios[sizeof (fhandler_termios)];
   char __pty_common[sizeof (fhandler_pty_common)];
   char __pty_slave[sizeof (fhandler_pty_slave)];
